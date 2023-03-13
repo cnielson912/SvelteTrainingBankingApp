@@ -1,0 +1,9 @@
+query getTotalSum {
+  transaction_aggregate {
+    aggregate {
+      sum {
+        amount
+      }
+    }
+  }
+}
