@@ -40,3 +40,5 @@ mutation{
   }
 }
 ```
+
+changint the readme to test if the git repo is acutally changed
