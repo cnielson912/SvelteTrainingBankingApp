@@ -591,7 +591,7 @@ export const GetTotalCompleteDocument = gql`
 }
     `;
 export const GetTotalPendingDocument = gql`
-    query totalComplete {
+    query getTotalPending {
   transaction_aggregate(where: {status: {_eq: "pending"}}) {
     aggregate {
       sum {
