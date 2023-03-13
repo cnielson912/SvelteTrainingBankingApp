@@ -4,9 +4,9 @@
     import type { GetTotalCompleteQuery, GetTotalPendingQuery, GetTotalSumQuery, GetTransactionsQuery } from "../graphql/graphql";
 
     let transactions:GetTransactionsQuery["transaction"] = [];
-    let totalAll:GetTotalSumQuery
-    let totalComplete:GetTotalCompleteQuery
-    let totalPending:GetTotalPendingQuery
+    let totalAll:number  //let totalAll:GetTotalSumQuery
+    let totalComplete:number  //let totalComplete:GetTotalCompleteQuery
+    let totalPending:number  //let totalPending:GetTotalPendingQuery
 
     onMount(async ()=>{
         transactions = (await graphqlGetTransactions({})).data.transaction;
