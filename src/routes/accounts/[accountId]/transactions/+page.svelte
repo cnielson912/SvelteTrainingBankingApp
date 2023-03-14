@@ -1,20 +1,21 @@
-<script lang="ts">
-    import {breadCrumbStore} from '../breadCrumbStore';
-    $breadCrumbStore = [{name:'home',url:'/'}]
-</script>
+<script lang='ts'>
+    import { page } from '$app/stores';
+    import { breadCrumbStore } from '../../../../breadCrumbStore';
+    import { onMount } from "svelte";
+	import { graphqlGetTotalSum, graphqlGetTransactions } from "../../../../graphql/graphqlApi";
+    import type { GetTransactionsQuery } from "../../../../graphql/graphql";
+    let params = $page.params;
+    let route = $page.route.id;
 
-<div>Home</div>
-<div>
-    <a href='/accounts' class="underline text-blue-500">Go to accounts</a>
-</div>
-
-<!-- <script lang="ts">
-	import { onMount } from "svelte";
-	import { graphqlGetTotalSum, graphqlGetTransactions } from "../graphql/graphqlApi";
-    import type { GetTransactionsQuery } from "../graphql/graphql";
-    import { breadCrumbStore } from '../breadCrumbStore';
-
-    $breadCrumbStore = [{name:'home', url:'/'}];
+    $breadCrumbStore = [
+        { name: 'home', url: '/' },
+        { name: 'accounts', url: '/accounts' },
+        {
+            name:'',
+            url:'/accounts/ '
+        },
+        { name: 'transactions', url: '/accounts/ /transactions' }
+    ];
 
     let transactions:GetTransactionsQuery["transaction"] = [];
     let totalAll:number
@@ -27,8 +28,15 @@
         totalComplete = (await graphqlGetTotalSum({where:{status:{_eq:"completed"}}})).data.transaction_aggregate.aggregate?.sum?.amount
         totalPending = (await graphqlGetTotalSum({where:{status:{_eq:"pending"}}})).data.transaction_aggregate.aggregate?.sum?.amount
     })
-    
 </script>
+
+<div>Params:</div>
+<pre>{JSON.stringify(params, null, 2)}</pre>
+<hr/>
+<div>Route:</div>
+<pre>{JSON.stringify(route, null, 2)}</pre>
+
+//Need to add in account name
 
 <div class="w-full">
     <table class="w-1/3 text-left">
@@ -67,4 +75,4 @@
             {/each}
         </tbody>
     </table>
-</div> -->
+</div>

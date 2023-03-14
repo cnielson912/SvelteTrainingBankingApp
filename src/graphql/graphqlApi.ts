@@ -1,5 +1,5 @@
 import { print } from 'graphql';
-import { GetTotalSumDocument, GetTransactionsDocument, InsertTransactionDocument, type GetTotalSumQuery, type GetTotalSumQueryVariables, type GetTransactionsQuery, type GetTransactionsQueryVariables, type InsertTransactionMutation, type InsertTransactionMutationVariables } from './graphql';
+import { GetAccountsDocument, GetTotalSumDocument, GetTransactionsDocument, InsertTransactionDocument, type GetAccountsQuery, type GetAccountsQueryVariables, type GetTotalSumQuery, type GetTotalSumQueryVariables, type GetTransactionsQuery, type GetTransactionsQueryVariables, type InsertTransactionMutation, type InsertTransactionMutationVariables } from './graphql';
 import { env } from '$env/dynamic/public'; 
 
 const url = env.PUBLIC_HASURA_URL;
@@ -47,4 +47,16 @@ export async function graphqlGetTotalSum(variables:GetTotalSumQueryVariables) {
         })
     })
     return await request.json() as GraphQLResponse<GetTotalSumQuery>;
+}
+
+export async function graphqlGetAccounts(variables:GetAccountsQueryVariables){
+    const request = await fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+            query:print(GetAccountsDocument),
+            variables
+        })
+    })
+    return await request.json() as GraphQLResponse<GetAccountsQuery>;
 }
