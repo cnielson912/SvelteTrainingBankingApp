@@ -1,5 +1,5 @@
 import { print } from 'graphql';
-import { GetTotalCompleteDocument, GetTotalPendingDocument, GetTotalSumDocument, GetTransactionsDocument, InsertTransactionDocument, type GetTotalCompleteQueryVariables, type GetTotalPendingQueryVariables, type GetTotalSumQuery, type GetTotalSumQueryVariables, type GetTransactionsQuery, type GetTransactionsQueryVariables, type InsertTransactionMutation, type InsertTransactionMutationVariables } from './graphql';
+import { GetTotalSumDocument, GetTransactionsDocument, InsertTransactionDocument, type GetTotalSumQuery, type GetTotalSumQueryVariables, type GetTransactionsQuery, type GetTransactionsQueryVariables, type InsertTransactionMutation, type InsertTransactionMutationVariables } from './graphql';
 import { env } from '$env/dynamic/public'; 
 
 const url = env.PUBLIC_HASURA_URL;

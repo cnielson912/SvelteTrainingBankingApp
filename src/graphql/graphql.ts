@@ -549,16 +549,6 @@ export type InsertTransactionMutationVariables = Exact<{ [key: string]: never; }
 
 export type InsertTransactionMutation = { __typename?: 'mutation_root', insert_transaction?: { __typename?: 'transaction_mutation_response', affected_rows: number } | null };
 
-export type GetTotalCompleteQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTotalCompleteQuery = { __typename?: 'query_root', transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', sum?: { __typename?: 'transaction_sum_fields', amount?: any | null } | null } | null } };
-
-export type GetTotalPendingQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTotalPendingQuery = { __typename?: 'query_root', transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', sum?: { __typename?: 'transaction_sum_fields', amount?: any | null } | null } | null } };
-
 export type GetTotalSumQueryVariables = Exact<{
   where?: InputMaybe<Transaction_Bool_Exp>;
 }>;
@@ -578,28 +568,6 @@ export const InsertTransactionDocument = gql`
     objects: {amount: "", description: "", category: "", status: "", transactionDate: "", postDate: ""}
   ) {
     affected_rows
-  }
-}
-    `;
-export const GetTotalCompleteDocument = gql`
-    query getTotalComplete {
-  transaction_aggregate(where: {status: {_eq: "completed"}}) {
-    aggregate {
-      sum {
-        amount
-      }
-    }
-  }
-}
-    `;
-export const GetTotalPendingDocument = gql`
-    query getTotalPending {
-  transaction_aggregate(where: {status: {_eq: "pending"}}) {
-    aggregate {
-      sum {
-        amount
-      }
-    }
   }
 }
     `;
@@ -634,12 +602,6 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
     insertTransaction(variables?: InsertTransactionMutationVariables, options?: C): Promise<InsertTransactionMutation> {
       return requester<InsertTransactionMutation, InsertTransactionMutationVariables>(InsertTransactionDocument, variables, options) as Promise<InsertTransactionMutation>;
-    },
-    getTotalComplete(variables?: GetTotalCompleteQueryVariables, options?: C): Promise<GetTotalCompleteQuery> {
-      return requester<GetTotalCompleteQuery, GetTotalCompleteQueryVariables>(GetTotalCompleteDocument, variables, options) as Promise<GetTotalCompleteQuery>;
-    },
-    getTotalPending(variables?: GetTotalPendingQueryVariables, options?: C): Promise<GetTotalPendingQuery> {
-      return requester<GetTotalPendingQuery, GetTotalPendingQueryVariables>(GetTotalPendingDocument, variables, options) as Promise<GetTotalPendingQuery>;
     },
     getTotalSum(variables?: GetTotalSumQueryVariables, options?: C): Promise<GetTotalSumQuery> {
       return requester<GetTotalSumQuery, GetTotalSumQueryVariables>(GetTotalSumDocument, variables, options) as Promise<GetTotalSumQuery>;
