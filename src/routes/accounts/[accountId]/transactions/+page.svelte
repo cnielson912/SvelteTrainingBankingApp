@@ -11,10 +11,10 @@
         { name: 'home', url: '/' },
         { name: 'accounts', url: '/accounts' },
         {
-            name:'',
-            url:'/accounts/ '
+            name:params.accountId,
+            url:('/accounts/' + params.accountId)
         },
-        { name: 'transactions', url: '/accounts/ /transactions' }
+        { name: 'transactions', url: '/transactions' }
     ];
 
     let transactions:GetTransactionsQuery["transaction"] = [];
@@ -23,7 +23,9 @@
     let totalPending:number
 
     onMount(async ()=>{
-        transactions = (await graphqlGetTransactions({})).data.transaction;
+        console.log(params.accountId)
+        
+        transactions = (await graphqlGetTransactions({where:{accountId:{_eq:params.accountId}}})).data.transaction;
         totalAll = (await graphqlGetTotalSum({})).data.transaction_aggregate.aggregate?.sum?.amount
         totalComplete = (await graphqlGetTotalSum({where:{status:{_eq:"completed"}}})).data.transaction_aggregate.aggregate?.sum?.amount
         totalPending = (await graphqlGetTotalSum({where:{status:{_eq:"pending"}}})).data.transaction_aggregate.aggregate?.sum?.amount
@@ -35,8 +37,6 @@
 <hr/>
 <div>Route:</div>
 <pre>{JSON.stringify(route, null, 2)}</pre>
-
-//Need to add in account name
 
 <div class="w-full">
     <table class="w-1/3 text-left">

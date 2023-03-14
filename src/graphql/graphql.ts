@@ -997,16 +997,18 @@ export type GetTotalSumQueryVariables = Exact<{
 
 export type GetTotalSumQuery = { __typename?: 'query_root', transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', sum?: { __typename?: 'transaction_sum_fields', amount?: any | null } | null } | null } };
 
-export type GetTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetTransactionsQueryVariables = Exact<{
+  where?: InputMaybe<Transaction_Bool_Exp>;
+}>;
 
 
-export type GetTransactionsQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', id: number, createdAt: any, updatedAt?: any | null, description: string, amount: any, status: string, category: string, transactionDate: any, postDate?: any | null }> };
+export type GetTransactionsQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', id: number, createdAt: any, updatedAt?: any | null, description: string, amount: any, status: string, category: string, transactionDate: any, postDate?: any | null, accountId?: any | null }> };
 
 
 export const InsertTransactionDocument = gql`
     mutation insertTransaction {
   insert_transaction(
-    objects: {amount: "", description: "", category: "", status: "", transactionDate: "", postDate: ""}
+    objects: {amount: "", description: "", category: "", status: "", transactionDate: "", postDate: "", accountId: ""}
   ) {
     affected_rows
   }
@@ -1032,8 +1034,8 @@ export const GetTotalSumDocument = gql`
 }
     `;
 export const GetTransactionsDocument = gql`
-    query getTransactions {
-  transaction {
+    query getTransactions($where: transaction_bool_exp) {
+  transaction(where: $where) {
     id
     createdAt
     updatedAt
@@ -1043,6 +1045,7 @@ export const GetTransactionsDocument = gql`
     category
     transactionDate
     postDate
+    accountId
   }
 }
     `;

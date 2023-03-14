@@ -1,5 +1,5 @@
-query getTransactions {
-  transaction {
+query getTransactions($where:transaction_bool_exp) {
+  transaction(where:$where) {
     id
     createdAt
     updatedAt
@@ -9,5 +9,6 @@ query getTransactions {
     category
     transactionDate
     postDate
+    accountId
   }
 }

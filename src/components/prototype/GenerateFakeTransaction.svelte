@@ -25,13 +25,16 @@
 			category,
 			status,
 			transactionDate,
-			postDate
+			postDate,
+			accountId
 		};
 	}
 
 	let result = '';
 	let statusCode = '';
 	let disabled = false;
+	let accountId = '';
+	$: disabled = accountId === '';
 	async function generate() {
 		disabled = true;
 		const body = JSON.stringify({
@@ -73,6 +76,10 @@
 </script>
 
 <div class="m-1 p-2 rounded-lg border border-cyan-500">
+	<span>Acccount Id</span><input
+		bind:value={accountId}
+		class="border border-blue-500 rounded-lg p-1"
+	/>
 	<button
 		class="rounded-lg border border-blue-600 bg-blue-500 p-2 m-1 text-white {disabled
 			? 'opacity-50 cursor-not-allowed'
