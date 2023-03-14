@@ -48,27 +48,3 @@ export async function graphqlGetTotalSum(variables:GetTotalSumQueryVariables) {
     })
     return await request.json() as GraphQLResponse<GetTotalSumQuery>;
 }
-
-export async function graphqlGetTotalComplete(variables:GetTotalCompleteQueryVariables) {
-    const request = await fetch(url, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-            query:print(GetTotalCompleteDocument),
-            variables
-        })
-    })
-    return await request.json() as GraphQLResponse<GetTotalCompleteQueryVariables>;
-}
-
-export async function graphlqGetTotalPending(variables:GetTotalPendingQueryVariables) {
-    const request = await fetch(url, {
-        method:'POST',
-        headers,
-        body: JSON.stringify({
-            query:print(GetTotalPendingDocument),
-            variables
-        })
-    })
-    return await request.json() as GraphQLResponse<GetTotalPendingQueryVariables>;
-}

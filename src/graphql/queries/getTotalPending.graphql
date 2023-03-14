@@ -1,9 +1,0 @@
-query getTotalPending {
-  transaction_aggregate(where: {status: {_eq: "pending"}}) {
-    aggregate {
-      sum {
-        amount
-      }
-    }
-  }
-}

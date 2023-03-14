@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { graphlqGetTotalPending, graphqlGetTotalComplete, graphqlGetTotalSum, graphqlGetTransactions } from "../graphql/graphqlApi";
-    import type { GetTotalCompleteQuery, GetTotalPendingQuery, GetTotalSumQuery, GetTransactionsQuery } from "../graphql/graphql";
+	import { graphqlGetTotalSum, graphqlGetTransactions } from "../graphql/graphqlApi";
+    import type { GetTransactionsQuery } from "../graphql/graphql";
 
     let transactions:GetTransactionsQuery["transaction"] = [];
-    let totalAll:number  //let totalAll:GetTotalSumQuery
-    let totalComplete:number  //let totalComplete:GetTotalCompleteQuery
-    let totalPending:number  //let totalPending:GetTotalPendingQuery
+    let totalAll:number
+    let totalComplete:number
+    let totalPending:number
 
     onMount(async ()=>{
         transactions = (await graphqlGetTransactions({})).data.transaction;

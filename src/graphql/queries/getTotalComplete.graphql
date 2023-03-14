@@ -1,9 +1,0 @@
-query getTotalComplete {
-  transaction_aggregate(where: {status: {_eq: "completed"}}) {
-    aggregate {
-      sum {
-        amount
-      }
-    }
-  }
-}
