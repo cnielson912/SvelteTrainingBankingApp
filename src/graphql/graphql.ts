@@ -559,7 +559,9 @@ export type GetTotalPendingQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetTotalPendingQuery = { __typename?: 'query_root', transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', sum?: { __typename?: 'transaction_sum_fields', amount?: any | null } | null } | null } };
 
-export type GetTotalSumQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetTotalSumQueryVariables = Exact<{
+  where?: InputMaybe<Transaction_Bool_Exp>;
+}>;
 
 
 export type GetTotalSumQuery = { __typename?: 'query_root', transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', sum?: { __typename?: 'transaction_sum_fields', amount?: any | null } | null } | null } };
@@ -602,8 +604,8 @@ export const GetTotalPendingDocument = gql`
 }
     `;
 export const GetTotalSumDocument = gql`
-    query getTotalSum {
-  transaction_aggregate {
+    query getTotalSum($where: transaction_bool_exp) {
+  transaction_aggregate(where: $where) {
     aggregate {
       sum {
         amount

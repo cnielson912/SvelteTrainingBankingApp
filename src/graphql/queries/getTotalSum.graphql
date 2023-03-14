@@ -1,5 +1,5 @@
-query getTotalSum {
-  transaction_aggregate {
+query getTotalSum($where:transaction_bool_exp) {
+  transaction_aggregate (where:$where){
     aggregate {
       sum {
         amount

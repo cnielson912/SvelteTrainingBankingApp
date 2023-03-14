@@ -11,8 +11,8 @@
     onMount(async ()=>{
         transactions = (await graphqlGetTransactions({})).data.transaction;
         totalAll = (await graphqlGetTotalSum({})).data.transaction_aggregate.aggregate?.sum?.amount
-        totalComplete = (await graphqlGetTotalComplete({})).data.transaction_aggregate.aggregate?.sum?.amount
-        totalPending = (await graphlqGetTotalPending({})).data.transaction_aggregate.aggregate?.sum.amount
+        totalComplete = (await graphqlGetTotalSum({where:{status:{_eq:"completed"}}})).data.transaction_aggregate.aggregate?.sum?.amount
+        totalPending = (await graphqlGetTotalSum({where:{status:{_eq:"pending"}}})).data.transaction_aggregate.aggregate?.sum?.amount
     })
     
 </script>
