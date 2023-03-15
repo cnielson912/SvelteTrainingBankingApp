@@ -17,7 +17,7 @@
     let value:number
     let datevalue:Date
 
-    let buttonStyle = "outline outline-black rounded rounded-md bg-blue-500 text-white h-[40px] w-[100px]";
+    let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px]";
     
     $breadCrumbStore = [
         { name: 'home', url: '/' },
@@ -63,7 +63,7 @@
     }
 </script>
 
-<div class="w-full space-y-2">
+<div class="w-full space-y-2 m-2">
     <table class="w-1/3 text-left">
         <thead>
             <th>Total All</th>
@@ -102,7 +102,7 @@
             {/each}
         </tbody>
     </table>
-    <div class="w-full flex space-x-2 py-2">
+    <div class="w-full flex space-x-2 py-2 items-center">
         <p>Results per page</p>
         <select bind:value on:change={()=>updateTable('changeamount',+value)} class="outline rounded-md">
             <option value=10>10</option>
