@@ -40,7 +40,9 @@
 		"@graphql-codegen/introspection": "^3.0.1",
 		"@graphql-codegen/typescript-generic-sdk": "^3.1.0",
 		"@graphql-codegen/typescript-operations": "^3.0.2",
+		"chart.js": "^4.2.1",
 		"dotenv": "^16.0.3",
-		"esbuild": "0.17.11"
+		"esbuild": "0.17.11",
+		"svelte-chartjs": "^3.1.2"
 	}
 }

@@ -999,6 +999,13 @@ export type GetTotalSumQueryVariables = Exact<{
 
 export type GetTotalSumQuery = { __typename?: 'query_root', transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', sum?: { __typename?: 'transaction_sum_fields', amount?: any | null } | null } | null } };
 
+export type GetTransactionCountQueryVariables = Exact<{
+  where?: InputMaybe<Transaction_Bool_Exp>;
+}>;
+
+
+export type GetTransactionCountQuery = { __typename?: 'query_root', transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null } };
+
 export type GetTransactionsQueryVariables = Exact<{
   where?: InputMaybe<Transaction_Bool_Exp>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1038,6 +1045,15 @@ export const GetTotalSumDocument = gql`
   }
 }
     `;
+export const GetTransactionCountDocument = gql`
+    query getTransactionCount($where: transaction_bool_exp) {
+  transaction_aggregate(where: $where) {
+    aggregate {
+      count(columns: accountId)
+    }
+  }
+}
+    `;
 export const GetTransactionsDocument = gql`
     query GetTransactions($where: transaction_bool_exp, $limit: Int, $offset: Int, $order_by: [transaction_order_by!]) {
   transaction(where: $where, limit: $limit, offset: $offset, order_by: $order_by) {
@@ -1065,6 +1081,9 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     },
     getTotalSum(variables?: GetTotalSumQueryVariables, options?: C): Promise<GetTotalSumQuery> {
       return requester<GetTotalSumQuery, GetTotalSumQueryVariables>(GetTotalSumDocument, variables, options) as Promise<GetTotalSumQuery>;
+    },
+    getTransactionCount(variables?: GetTransactionCountQueryVariables, options?: C): Promise<GetTransactionCountQuery> {
+      return requester<GetTransactionCountQuery, GetTransactionCountQueryVariables>(GetTransactionCountDocument, variables, options) as Promise<GetTransactionCountQuery>;
     },
     GetTransactions(variables?: GetTransactionsQueryVariables, options?: C): Promise<GetTransactionsQuery> {
       return requester<GetTransactionsQuery, GetTransactionsQueryVariables>(GetTransactionsDocument, variables, options) as Promise<GetTransactionsQuery>;

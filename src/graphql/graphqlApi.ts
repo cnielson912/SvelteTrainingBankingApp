@@ -1,5 +1,5 @@
 import { print } from 'graphql';
-import { GetAccountsDocument, GetTotalSumDocument, GetTransactionsDocument, InsertTransactionDocument, type GetAccountsQuery, type GetAccountsQueryVariables, type GetTotalSumQuery, type GetTotalSumQueryVariables, type GetTransactionsQuery, type GetTransactionsQueryVariables, type InsertTransactionMutation, type InsertTransactionMutationVariables } from './graphql';
+import { GetAccountsDocument, GetTotalSumDocument, GetTransactionCountDocument, GetTransactionsDocument, InsertTransactionDocument, type GetAccountsQuery, type GetAccountsQueryVariables, type GetTotalSumQuery, type GetTotalSumQueryVariables, type GetTransactionCountQuery, type GetTransactionCountQueryVariables, type GetTransactionsQuery, type GetTransactionsQueryVariables, type InsertTransactionMutation, type InsertTransactionMutationVariables } from './graphql';
 import { env } from '$env/dynamic/public'; 
 
 const url = env.PUBLIC_HASURA_URL;
@@ -59,4 +59,16 @@ export async function graphqlGetAccounts(variables:GetAccountsQueryVariables){
         })
     })
     return await request.json() as GraphQLResponse<GetAccountsQuery>;
+}
+
+export async function graphqlGetTransactionCount(variables:GetTransactionCountQueryVariables) {
+    const request = await fetch(url,{
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+            query:print(GetTransactionCountDocument),
+            variables
+        })
+    })
+    return await request.json() as GraphQLResponse<GetTransactionCountQuery>;
 }
