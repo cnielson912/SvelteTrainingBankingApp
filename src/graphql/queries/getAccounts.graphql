@@ -1,5 +1,5 @@
-query getAccounts {
-    account{
+query getAccounts($where: account_bool_exp) {
+    account(where: $where){
         id
         name
     }

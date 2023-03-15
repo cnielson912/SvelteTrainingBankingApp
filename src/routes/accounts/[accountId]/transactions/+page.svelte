@@ -2,41 +2,44 @@
     import { page } from '$app/stores';
     import { breadCrumbStore } from '../../../../breadCrumbStore';
     import { onMount } from "svelte";
-	import { graphqlGetTotalSum, graphqlGetTransactions } from "../../../../graphql/graphqlApi";
+	import { graphqlGetAccounts, graphqlGetTotalSum, graphqlGetTransactions } from "../../../../graphql/graphqlApi";
     import type { GetTransactionsQuery } from "../../../../graphql/graphql";
     let params = $page.params;
-    let route = $page.route.id;
-
+    let transactions:GetTransactionsQuery["transaction"] = [];
+    let totalAll:number
+    let totalComplete:number
+    let totalPending:number
+    let currentAccount:{id:any,name:string} | undefined
+    
     $breadCrumbStore = [
         { name: 'home', url: '/' },
         { name: 'accounts', url: '/accounts' },
         {
-            name:params.accountId,
+            name:"loading...",
             url:('/accounts/' + params.accountId)
         },
         { name: 'transactions', url: '/transactions' }
     ];
 
-    let transactions:GetTransactionsQuery["transaction"] = [];
-    let totalAll:number
-    let totalComplete:number
-    let totalPending:number
+    
 
     onMount(async ()=>{
-        console.log(params.accountId)
-        
+        currentAccount = (await graphqlGetAccounts({where:{id:{_eq:params.accountId}}})).data.account.at(0);
+        $breadCrumbStore = [
+        { name: 'home', url: '/' },
+        { name: 'accounts', url: '/accounts' },
+        {
+            name:currentAccount?.name ?? '',
+            url:('/accounts/' + params.accountId)
+        },
+        { name: 'transactions', url: '/transactions' }
+        ];
         transactions = (await graphqlGetTransactions({where:{accountId:{_eq:params.accountId}}})).data.transaction;
-        totalAll = (await graphqlGetTotalSum({})).data.transaction_aggregate.aggregate?.sum?.amount
-        totalComplete = (await graphqlGetTotalSum({where:{status:{_eq:"completed"}}})).data.transaction_aggregate.aggregate?.sum?.amount
-        totalPending = (await graphqlGetTotalSum({where:{status:{_eq:"pending"}}})).data.transaction_aggregate.aggregate?.sum?.amount
+        totalAll = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}}})).data.transaction_aggregate.aggregate?.sum?.amount
+        totalComplete = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}, status:{_eq:"completed"}}})).data.transaction_aggregate.aggregate?.sum?.amount
+        totalPending = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}, status:{_eq:"pending"}}})).data.transaction_aggregate.aggregate?.sum?.amount
     })
 </script>
-
-<div>Params:</div>
-<pre>{JSON.stringify(params, null, 2)}</pre>
-<hr/>
-<div>Route:</div>
-<pre>{JSON.stringify(route, null, 2)}</pre>
 
 <div class="w-full">
     <table class="w-1/3 text-left">
