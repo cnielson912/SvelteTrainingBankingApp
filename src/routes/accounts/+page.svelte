@@ -16,9 +16,9 @@ import Card from '../../components/Card.svelte';
     })
 </script>
 
-<div class="space-x-10 h-1/2">
+<div class="space-y-2 m-2 h-1/2">
     Accounts
     {#each accounts as account}
-    <a href={"/accounts/" + account.id + "/transactions"}><Card account={account.name.toString()}/></a>
+    <div class="w-[10rem]"><a href={"/accounts/" + account.id + "/transactions"}><Card account={account.name.toString()}/></a></div>
     {/each}
 </div>
