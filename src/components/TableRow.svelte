@@ -22,10 +22,26 @@
     let transactionDate:Date = transaction.transactionDate;
     let postDate:Date = transaction.postDate;
     let today = new Date()
+    let dd = today.getDate()
+    let mm = today.getMonth() + 1
+    let yyyy = today.getFullYear()
+    let todayString = (yyyy + '-' + addLeadingZero(mm) + '-' + addLeadingZero(dd))
+    
 
     let editMode:boolean = false;
     let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px] hover:bg-blue-400 hover:outline hover:outline-black disabled:opacity-50 disabled:cursor-not-allowed";
     let cancelButtonStyle = "rounded rounded-md bg-red-500 text-white text-sm h-[40px] w-[100px] hover:bg-red-400 hover:outline hover:outline-black";
+
+    function addLeadingZero(num:number){
+        let result:string
+        if(num < 10){
+            result = ("0" + num)
+        }
+        else{
+            result = num.toString()
+        }
+        return result
+    }
 
     function toggleEditMode(){
         if(editMode === true){
@@ -47,8 +63,12 @@
             set.category = transaction.category
         }
         if(transactionDate !== transaction.transactionDate){
-            set.transactionDate = transaction.transactionDate
-            
+            if(transaction.transactionDate < todayString){
+                set.transactionDate = transaction.transactionDate
+            }
+            else{
+                transaction.transactionDate = transactionDate
+            }
         }
         if(postDate !== transaction.postDate){
             if(transaction.postDate >= transaction.transactionDate){
@@ -76,14 +96,14 @@
     <td><input disabled={editMode === false} bind:value={transaction.amount}/></td>
     <td><input disabled={editMode === false} bind:value={transaction.description}/></td>
     <td><input disabled={editMode === false} bind:value={transaction.category}/></td>
-    <td><input disabled={editMode === false} bind:value={transaction.transactionDate} type="date"/></td>
+    <td><input disabled={editMode === false} max={todayString} bind:value={transaction.transactionDate} type="date"/></td>
     <td><input disabled bind:value={transaction.status}/></td>
     <td><input disabled={editMode === false || transaction.status === "completed"} bind:value={transaction.postDate} type="date"/></td>
     {#if editMode === false}
         <td><button on:click={toggleEditMode} class={buttonStyle}>Edit</button></td>
     {:else if editMode === true}
         <td>
-            <button disabled={transaction.postDate < transactionDate} on:click={submitUpdate} class={buttonStyle}>Submit</button>
+            <button disabled={transaction.postDate < transactionDate || transaction.transactionDate > todayString} on:click={submitUpdate} class={buttonStyle}>Submit</button>
             <button on:click={cancelUpdate} class={cancelButtonStyle}>Cancel</button>
         </td>
     {/if}
