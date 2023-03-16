@@ -1,11 +1,9 @@
 <script lang='ts'>
     import {Pie} from 'svelte-chartjs';
     import {Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, } from 'chart.js';
-	import { onMount } from 'svelte';
 
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
-    //export let accountId:string;
     export let labels:string[];
     export let values:number[];
     export let colors:string[];
@@ -19,10 +17,6 @@
             hoverOffset: 4
         }]
     }
-
-    
-
-    
 
 </script>
 

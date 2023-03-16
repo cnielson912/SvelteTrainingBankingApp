@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Transaction_Insert_Input } from "../graphql/graphql";
 	import { graphqlUpdateTransaction } from "../graphql/graphqlApi";
-
 	
     export let transaction:{
         id: number;
@@ -82,7 +81,7 @@
         graphqlUpdateTransaction({where:{id:{_eq:transaction.id}},_set:set})
         editMode = false;
     }
-    
+
     function cancelUpdate(){
         transaction.amount = amount;
         transaction.description = description;

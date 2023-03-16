@@ -22,6 +22,6 @@ import Card from '../../components/Card.svelte';
     </div>
      
     {#each accounts as account}
-    <div class="p-2 col-span-1"><a href={"/accounts/" + account.id + "/transactions"}><Card account={account.name.toString()}/></a></div>
+    <div class="p-2 col-span-1"><a href={"/accounts/" + account.id}><Card account={account.name.toString()}/></a></div>
     {/each}
 </div>
