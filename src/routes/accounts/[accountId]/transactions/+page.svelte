@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
 	import { graphqlGetAccounts, graphqlGetTotalSum, graphqlGetTransactions } from "../../../../graphql/graphqlApi";
     import type { GetTransactionsQuery } from "../../../../graphql/graphql";
+	import TableRow from '../../../../components/TableRow.svelte';
     
     let params = $page.params;
     let transactions:GetTransactionsQuery["transaction"] = [];
@@ -16,8 +17,10 @@
     let selectedDate:Date
     let value:number
     let datevalue:Date
+    let editMode:boolean = false
 
-    let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px]";
+    let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px] hover:bg-blue-400 hover:outline hover:outline-black";
+    let cancelButtonStyle = "rounded rounded-md bg-red-500 text-white text-sm h-[40px] w-[100px] hover:bg-red-400 hover:outline hover:outline-black";
     
     $breadCrumbStore = [
         { name: 'home', url: '/' },
@@ -77,7 +80,7 @@
         </tbody>
     </table>
     <p>Transaction Date Range</p>
-    <input bind:value={datevalue} on:change={()=>updateTable('setdate', undefined ,datevalue)} class="outline" type="date"/>
+    <input bind:value={datevalue} on:change={()=>updateTable('setdate', undefined ,datevalue)} class="outline rounded-md" type="date"/>
     <table class="outline rounded-md min-w-full text-left">
         <thead class="outline rounded">
             <tr>
@@ -87,18 +90,12 @@
                 <th>Transaction Date</th>
                 <th>Status</th>
                 <th>Post Date</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
             {#each transactions as transaction}
-            <tr class="even:bg-white odd:bg-blue-100">
-                <td>{transaction.amount}</td>
-                <td>{transaction.description}</td>
-                <td>{transaction.category}</td>
-                <td>{transaction.transactionDate}</td>
-                <td>{transaction.status}</td>
-                <td>{transaction.postDate}</td>
-            </tr>
+            <TableRow transaction={transaction}/>
             {/each}
         </tbody>
     </table>
