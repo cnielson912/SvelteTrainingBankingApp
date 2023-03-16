@@ -2,10 +2,17 @@
     import { breadCrumbStore } from '../../../breadCrumbStore';
     import {page} from '$app/stores'
     import { onMount } from 'svelte';
-    import { graphqlGetAccounts } from '../../../graphql/graphqlApi';
+    import { graphqlGetAccounts, graphqlGetTransactionCount } from '../../../graphql/graphqlApi';
 	import PieChart from '../../../components/PieChart.svelte';
     let params = $page.params
     let currentAccount:{id:any,name:string} | undefined
+    let total:number;
+    let utilities:number; 
+    let entertainment:number;
+    let food:number;
+    let complete:number;
+    let pending:number;
+
     $breadCrumbStore = [
         {name:'home', url: '/'},
         {name:'accounts', url: '/accounts'},
@@ -18,14 +25,27 @@
             { name: 'accounts', url: '/accounts' },
             { name:currentAccount?.name ?? '', url:('/accounts/' + params.accountId) }
         ];
+        
     })
+    async function getInfo(){
+            total = (await graphqlGetTransactionCount({where:{accountId:{_eq:params.accountId}}})).data.transaction_aggregate.aggregate?.count ?? 0
+            utilities = (await graphqlGetTransactionCount({where:{accountId:{_eq:params.accountId}, category:{_eq:"utilities"}}})).data.transaction_aggregate.aggregate?.count ?? 0
+            entertainment = (await graphqlGetTransactionCount({where:{accountId:{_eq:params.accountId}, category:{_eq:"entertainment"}}})).data.transaction_aggregate.aggregate?.count ?? 0
+            food = (await graphqlGetTransactionCount({where:{accountId:{_eq:params.accountId}, category:{_eq:"food"}}})).data.transaction_aggregate.aggregate?.count ?? 0
+            complete = (await graphqlGetTransactionCount({where:{accountId:{_eq:params.accountId}, status:{_eq:"completed"}}})).data.transaction_aggregate.aggregate?.count ?? 0
+            pending = (await graphqlGetTransactionCount({where:{accountId:{_eq:params.accountId}, status:{_eq:"pending"}}})).data.transaction_aggregate.aggregate?.count ?? 0
+        }
 </script>
 
 <div class="space-y-2">
     <a href={"/accounts/" + params.accountId + '/transactions'} class="underline text-blue-500 text-2xl">Transactions</a>
 
     <div class="w-1/3">
-        <PieChart accountId={params.accountId}/>
+        {#await getInfo() then}
+            <PieChart labels={['Utilities','Entertainment','Food']} values={[utilities,entertainment,food]} />
+            <PieChart labels={['Completed', 'Pending']} values={[complete,pending]}/>
+        {/await}
+       
     </div>
     
 </div>

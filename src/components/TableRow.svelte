@@ -21,9 +21,10 @@
     let category:string = transaction.category;
     let transactionDate:Date = transaction.transactionDate;
     let postDate:Date = transaction.postDate;
+    let today = new Date()
 
     let editMode:boolean = false;
-    let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px] hover:bg-blue-400 hover:outline hover:outline-black";
+    let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px] hover:bg-blue-400 hover:outline hover:outline-black disabled:opacity-50 disabled:cursor-not-allowed";
     let cancelButtonStyle = "rounded rounded-md bg-red-500 text-white text-sm h-[40px] w-[100px] hover:bg-red-400 hover:outline hover:outline-black";
 
     function toggleEditMode(){
@@ -50,12 +51,23 @@
             
         }
         if(postDate !== transaction.postDate){
-            set.postDate = transaction.postDate
-            if(transaction.postDate){
+            if(transaction.postDate >= transaction.transactionDate){
+                set.postDate = transaction.postDate
                 set.status = "completed"
+            }
+            else{
+                transaction.postDate = postDate
             }
         }
         graphqlUpdateTransaction({where:{id:{_eq:transaction.id}},_set:set})
+        editMode = false;
+    }
+    function cancelUpdate(){
+        transaction.amount = amount;
+        transaction.description = description;
+        transaction.category = category;
+        transaction.transactionDate = transactionDate;
+        transaction.postDate = postDate;
         editMode = false;
     }
 </script>
@@ -66,13 +78,13 @@
     <td><input disabled={editMode === false} bind:value={transaction.category}/></td>
     <td><input disabled={editMode === false} bind:value={transaction.transactionDate} type="date"/></td>
     <td><input disabled bind:value={transaction.status}/></td>
-    <td><input disabled={editMode === false} bind:value={transaction.postDate} type="date"/></td>
+    <td><input disabled={editMode === false || transaction.status === "completed"} bind:value={transaction.postDate} type="date"/></td>
     {#if editMode === false}
         <td><button on:click={toggleEditMode} class={buttonStyle}>Edit</button></td>
     {:else if editMode === true}
         <td>
-            <button on:click={submitUpdate} class={buttonStyle}>Submit</button>
-            <button on:click={toggleEditMode} class={cancelButtonStyle}>Cancel</button>
+            <button disabled={transaction.postDate < transactionDate} on:click={submitUpdate} class={buttonStyle}>Submit</button>
+            <button on:click={cancelUpdate} class={cancelButtonStyle}>Cancel</button>
         </td>
     {/if}
 </tr>
