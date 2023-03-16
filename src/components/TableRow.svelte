@@ -47,9 +47,13 @@
         }
         if(transactionDate !== transaction.transactionDate){
             set.transactionDate = transaction.transactionDate
+            
         }
         if(postDate !== transaction.postDate){
             set.postDate = transaction.postDate
+            if(transaction.postDate){
+                set.status = "completed"
+            }
         }
         graphqlUpdateTransaction({where:{id:{_eq:transaction.id}},_set:set})
         editMode = false;
@@ -61,7 +65,7 @@
     <td><input disabled={editMode === false} bind:value={transaction.description}/></td>
     <td><input disabled={editMode === false} bind:value={transaction.category}/></td>
     <td><input disabled={editMode === false} bind:value={transaction.transactionDate} type="date"/></td>
-    <td><input disabled value={transaction.status}/></td>
+    <td><input disabled bind:value={transaction.status}/></td>
     <td><input disabled={editMode === false} bind:value={transaction.postDate} type="date"/></td>
     {#if editMode === false}
         <td><button on:click={toggleEditMode} class={buttonStyle}>Edit</button></td>

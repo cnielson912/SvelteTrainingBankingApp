@@ -17,10 +17,8 @@
     let selectedDate:Date
     let value:number
     let datevalue:Date
-    let editMode:boolean = false
 
-    let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px] hover:bg-blue-400 hover:outline hover:outline-black";
-    let cancelButtonStyle = "rounded rounded-md bg-red-500 text-white text-sm h-[40px] w-[100px] hover:bg-red-400 hover:outline hover:outline-black";
+    let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px] hover:bg-blue-400 hover:outline hover:outline-black disabled:opacity-50 disabled:cursor-not-allowed";
     
     $breadCrumbStore = [
         { name: 'home', url: '/' },
@@ -106,7 +104,7 @@
             <option value=25>25</option>
             <option value=100>100</option>
         </select>
-        <button on:click={()=>updateTable('decrement')} class={buttonStyle}>Previous Page</button>
+        <button disabled={currentpage === 0} on:click={()=>updateTable('decrement')} class={buttonStyle}>Previous Page</button>
         <p>Page: {currentpage + 1}</p>
         <button on:click={()=>updateTable('increment')} class={buttonStyle}>Next Page</button>
     </div>
