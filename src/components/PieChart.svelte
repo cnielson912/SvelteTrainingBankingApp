@@ -59,4 +59,11 @@
 
 </script>
 
-<Pie {data} options={{responsive:true}}/>
+<div>
+    <div class="flex justify-center">
+        <p>Spending Analysis</p>
+    </div>
+    <div class="flex justify-center">
+        <Pie {data} options={{responsive:true}}/>
+    </div>
+</div>

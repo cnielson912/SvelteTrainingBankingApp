@@ -3,7 +3,7 @@
     import {page} from '$app/stores'
     import { onMount } from 'svelte';
     import { graphqlGetAccounts } from '../../../graphql/graphqlApi';
-	import Chart from '../../../components/Chart.svelte';
+	import PieChart from '../../../components/PieChart.svelte';
     let params = $page.params
     let currentAccount:{id:any,name:string} | undefined
     $breadCrumbStore = [
@@ -21,11 +21,11 @@
     })
 </script>
 
-<div>
-    <a href={"/accounts/" + params.accountId + '/transactions'} class="underline text-blue-500">Transactions</a>
+<div class="space-y-2">
+    <a href={"/accounts/" + params.accountId + '/transactions'} class="underline text-blue-500 text-2xl">Transactions</a>
 
-    <div class="h-60">
-        <Chart accountId={params.accountId}/>
+    <div class="w-1/3">
+        <PieChart accountId={params.accountId}/>
     </div>
     
 </div>
