@@ -8,18 +8,14 @@
     //export let accountId:string;
     export let labels:string[];
     export let values:number[];
-
+    export let colors:string[];
     
     let data = {
         labels: labels,
         datasets: [{
             label: 'Number of Transactions',
             data: values,
-            backgroundColor: [
-                '#F7464A',
-                '#46BFBD',
-                '#FDB45C'
-            ],
+            backgroundColor: colors,
             hoverOffset: 4
         }]
     }

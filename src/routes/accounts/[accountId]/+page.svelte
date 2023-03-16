@@ -12,6 +12,9 @@
     let food:number;
     let complete:number;
     let pending:number;
+    let red:string = '#F7464A'
+    let blue:string = '#02BCD6'
+    let green:string = '#59ED09'
 
     $breadCrumbStore = [
         {name:'home', url: '/'},
@@ -37,15 +40,18 @@
         }
 </script>
 
-<div class="space-y-2">
+<div class="space-y-2 grid grid-cols-2">
+    <p class="text-5xl col-span-2 text-left">Account Page</p>
     <a href={"/accounts/" + params.accountId + '/transactions'} class="underline text-blue-500 text-2xl">Transactions</a>
-
-    <div class="w-1/3">
-        {#await getInfo() then}
-            <PieChart labels={['Utilities','Entertainment','Food']} values={[utilities,entertainment,food]} />
-            <PieChart labels={['Completed', 'Pending']} values={[complete,pending]}/>
-        {/await}
-       
+    <p class="text-3xl col-span-2 text-center">Transaction Analysis</p>
+    {#await getInfo() then}
+    <div class="col-span-1">
+        <p class="text-center text-2xl">Transaction Types</p>
+            <PieChart labels={['Utilities','Entertainment','Food']} values={[utilities,entertainment,food]} colors={[red, blue, green]} />
     </div>
-    
+    <div class="col-span-1">
+        <p class="text-center text-2xl">Transaction Statuses</p>
+            <PieChart labels={['Completed', 'Pending']} values={[complete,pending]} colors={[red, blue]}/>
+    </div>
+    {/await}
 </div>
