@@ -1,0 +1,5 @@
+mutation updateTransaction($where: transaction_bool_exp!, $_set: transaction_set_input) {
+  update_transaction(_set: $_set, where: $where) {
+    affected_rows
+  }
+}

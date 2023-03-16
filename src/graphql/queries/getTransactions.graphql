@@ -1,9 +1,9 @@
-query GetTransactions($where:transaction_bool_exp, $limit: Int, $offset: Int, $order_by:[transaction_order_by!]) {
+query GetTransactions($where:transaction_bool_exp, $limit: Int, $offset: Int) {
   transaction(
     where:$where,
     limit:$limit,
   	offset:$offset,
-  	order_by:$order_by
+  	order_by:{transactionDate:asc}
   	)
     {
     id

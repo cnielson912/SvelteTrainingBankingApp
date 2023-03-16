@@ -43,7 +43,7 @@
         },
         { name: 'transactions', url: '/transactions' }
         ];
-        transactions = (await graphqlGetTransactions({where:{accountId:{_eq:params.accountId}, transactionDate:{_gte:selectedDate}},limit:numResults,offset:currentpage*numResults})).data.transaction;
+        transactions = (await graphqlGetTransactions({where:{accountId:{_eq:params.accountId}, transactionDate:{_gte:selectedDate}}, limit:numResults, offset:currentpage*numResults})).data.transaction;
         totalAll = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}}})).data.transaction_aggregate.aggregate?.sum?.amount
         totalComplete = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}, status:{_eq:"completed"}}})).data.transaction_aggregate.aggregate?.sum?.amount
         totalPending = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}, status:{_eq:"pending"}}})).data.transaction_aggregate.aggregate?.sum?.amount

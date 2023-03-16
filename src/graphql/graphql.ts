@@ -985,6 +985,14 @@ export type InsertTransactionMutationVariables = Exact<{ [key: string]: never; }
 
 export type InsertTransactionMutation = { __typename?: 'mutation_root', insert_transaction?: { __typename?: 'transaction_mutation_response', affected_rows: number } | null };
 
+export type UpdateTransactionMutationVariables = Exact<{
+  where: Transaction_Bool_Exp;
+  _set?: InputMaybe<Transaction_Set_Input>;
+}>;
+
+
+export type UpdateTransactionMutation = { __typename?: 'mutation_root', update_transaction?: { __typename?: 'transaction_mutation_response', affected_rows: number } | null };
+
 export type GetAccountsQueryVariables = Exact<{
   where?: InputMaybe<Account_Bool_Exp>;
 }>;
@@ -1010,7 +1018,6 @@ export type GetTransactionsQueryVariables = Exact<{
   where?: InputMaybe<Transaction_Bool_Exp>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Transaction_Order_By> | Transaction_Order_By>;
 }>;
 
 
@@ -1022,6 +1029,13 @@ export const InsertTransactionDocument = gql`
   insert_transaction(
     objects: {amount: "", description: "", category: "", status: "", transactionDate: "", postDate: "", accountId: ""}
   ) {
+    affected_rows
+  }
+}
+    `;
+export const UpdateTransactionDocument = gql`
+    mutation updateTransaction($where: transaction_bool_exp!, $_set: transaction_set_input) {
+  update_transaction(_set: $_set, where: $where) {
     affected_rows
   }
 }
@@ -1055,8 +1069,13 @@ export const GetTransactionCountDocument = gql`
 }
     `;
 export const GetTransactionsDocument = gql`
-    query GetTransactions($where: transaction_bool_exp, $limit: Int, $offset: Int, $order_by: [transaction_order_by!]) {
-  transaction(where: $where, limit: $limit, offset: $offset, order_by: $order_by) {
+    query GetTransactions($where: transaction_bool_exp, $limit: Int, $offset: Int) {
+  transaction(
+    where: $where
+    limit: $limit
+    offset: $offset
+    order_by: {transactionDate: asc}
+  ) {
     id
     createdAt
     updatedAt
@@ -1075,6 +1094,9 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
     insertTransaction(variables?: InsertTransactionMutationVariables, options?: C): Promise<InsertTransactionMutation> {
       return requester<InsertTransactionMutation, InsertTransactionMutationVariables>(InsertTransactionDocument, variables, options) as Promise<InsertTransactionMutation>;
+    },
+    updateTransaction(variables: UpdateTransactionMutationVariables, options?: C): Promise<UpdateTransactionMutation> {
+      return requester<UpdateTransactionMutation, UpdateTransactionMutationVariables>(UpdateTransactionDocument, variables, options) as Promise<UpdateTransactionMutation>;
     },
     getAccounts(variables?: GetAccountsQueryVariables, options?: C): Promise<GetAccountsQuery> {
       return requester<GetAccountsQuery, GetAccountsQueryVariables>(GetAccountsDocument, variables, options) as Promise<GetAccountsQuery>;
