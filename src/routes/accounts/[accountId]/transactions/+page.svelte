@@ -64,7 +64,7 @@
         transactions = (await graphqlGetTransactions({where:{accountId:{_eq:params.accountId}, transactionDate:{_gte:selectedDate}},limit:numResults,offset:currentpage*numResults})).data.transaction;
     }
 </script>
-
+{$page.route.id}
 <div class="w-full space-y-2 m-2">
     <table class="w-1/3 text-left">
         <thead>

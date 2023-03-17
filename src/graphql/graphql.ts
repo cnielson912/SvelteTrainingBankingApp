@@ -1772,6 +1772,16 @@ export type GetAccountsQueryVariables = Exact<{
 
 export type GetAccountsQuery = { __typename?: 'query_root', account: Array<{ __typename?: 'account', id: any, name: string }> };
 
+export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCategoriesQuery = { __typename?: 'query_root', transactionCategory: Array<{ __typename?: 'transactionCategory', description: string, enum: number }> };
+
+export type GetStatusesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetStatusesQuery = { __typename?: 'query_root', transactionStatus: Array<{ __typename?: 'transactionStatus', description: string, enum: number }> };
+
 export type GetTotalSumQueryVariables = Exact<{
   where?: InputMaybe<Transaction_Bool_Exp>;
 }>;
@@ -1817,6 +1827,22 @@ export const GetAccountsDocument = gql`
   account(where: $where) {
     id
     name
+  }
+}
+    `;
+export const GetCategoriesDocument = gql`
+    query getCategories {
+  transactionCategory {
+    description
+    enum
+  }
+}
+    `;
+export const GetStatusesDocument = gql`
+    query getStatuses {
+  transactionStatus {
+    description
+    enum
   }
 }
     `;
@@ -1880,6 +1906,12 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     },
     getAccounts(variables?: GetAccountsQueryVariables, options?: C): Promise<GetAccountsQuery> {
       return requester<GetAccountsQuery, GetAccountsQueryVariables>(GetAccountsDocument, variables, options) as Promise<GetAccountsQuery>;
+    },
+    getCategories(variables?: GetCategoriesQueryVariables, options?: C): Promise<GetCategoriesQuery> {
+      return requester<GetCategoriesQuery, GetCategoriesQueryVariables>(GetCategoriesDocument, variables, options) as Promise<GetCategoriesQuery>;
+    },
+    getStatuses(variables?: GetStatusesQueryVariables, options?: C): Promise<GetStatusesQuery> {
+      return requester<GetStatusesQuery, GetStatusesQueryVariables>(GetStatusesDocument, variables, options) as Promise<GetStatusesQuery>;
     },
     getTotalSum(variables?: GetTotalSumQueryVariables, options?: C): Promise<GetTotalSumQuery> {
       return requester<GetTotalSumQuery, GetTotalSumQueryVariables>(GetTotalSumDocument, variables, options) as Promise<GetTotalSumQuery>;

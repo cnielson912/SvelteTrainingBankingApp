@@ -1,0 +1,6 @@
+query getCategories {
+  transactionCategory {
+    description
+    enum
+  }
+}

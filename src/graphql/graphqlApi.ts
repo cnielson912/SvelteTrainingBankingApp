@@ -1,5 +1,5 @@
 import { print } from 'graphql';
-import { GetAccountsDocument, GetTotalSumDocument, GetTransactionCountDocument, GetTransactionsDocument, InsertTransactionDocument, UpdateTransactionDocument, type GetAccountsQuery, type GetAccountsQueryVariables, type GetTotalSumQuery, type GetTotalSumQueryVariables, type GetTransactionCountQuery, type GetTransactionCountQueryVariables, type GetTransactionsQuery, type GetTransactionsQueryVariables, type InsertTransactionMutation, type InsertTransactionMutationVariables, type UpdateTransactionMutation, type UpdateTransactionMutationVariables } from './graphql';
+import { GetAccountsDocument, GetCategoriesDocument, GetStatusesDocument, GetTotalSumDocument, GetTransactionCountDocument, GetTransactionsDocument, InsertTransactionDocument, UpdateTransactionDocument, type GetAccountsQuery, type GetAccountsQueryVariables, type GetCategoriesQuery, type GetCategoriesQueryVariables, type GetStatusesQuery, type GetStatusesQueryVariables, type GetTotalSumQuery, type GetTotalSumQueryVariables, type GetTransactionCountQuery, type GetTransactionCountQueryVariables, type GetTransactionsQuery, type GetTransactionsQueryVariables, type InsertTransactionMutation, type InsertTransactionMutationVariables, type UpdateTransactionMutation, type UpdateTransactionMutationVariables } from './graphql';
 import { env } from '$env/dynamic/public'; 
 
 const url = env.PUBLIC_HASURA_URL;
@@ -83,4 +83,28 @@ export async function graphqlUpdateTransaction(variables:UpdateTransactionMutati
         })
     })
     return await request.json() as GraphQLResponse<UpdateTransactionMutation>;
+}
+
+export async function graphqlGetCategories(variables:GetCategoriesQueryVariables) {
+    const request = await fetch(url,{
+        method:'POST',
+        headers,
+        body: JSON.stringify({
+            query:print(GetCategoriesDocument),
+            variables
+        })
+    })
+    return await request.json() as GraphQLResponse<GetCategoriesQuery>;
+}
+
+export async function graphqlGetStatuses(variables:GetStatusesQueryVariables) {
+    const request = await fetch(url,{
+        method:'POST',
+        headers,
+        body: JSON.stringify({
+            query:print(GetStatusesDocument),
+            variables
+        })
+    })
+    return await request.json() as GraphQLResponse<GetStatusesQuery>;
 }

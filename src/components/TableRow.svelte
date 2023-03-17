@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { Transaction_Insert_Input } from "../graphql/graphql";
-	import { graphqlUpdateTransaction } from "../graphql/graphqlApi";
+	import { onMount } from "svelte";
+	import type { GetCategoriesQuery, GetStatusesQuery, Transaction_Insert_Input } from "../graphql/graphql";
+	import { graphqlGetCategories, graphqlGetStatuses, graphqlGetTransactions, graphqlUpdateTransaction } from "../graphql/graphqlApi";
 	
     export let transaction:{
         id: number;
@@ -34,10 +35,17 @@
     let yyyy = today.getFullYear()
     let todayString = (yyyy + '-' + addLeadingZero(mm) + '-' + addLeadingZero(dd))
     
+    let categories:GetCategoriesQuery["transactionCategory"] = [];
+    let statuses:GetStatusesQuery['transactionStatus'] =[];
 
     let editMode:boolean = false;
     let buttonStyle = "rounded rounded-md bg-blue-500 text-white text-sm h-[40px] w-[100px] hover:bg-blue-400 hover:outline hover:outline-black disabled:opacity-50 disabled:cursor-not-allowed";
     let cancelButtonStyle = "rounded rounded-md bg-red-500 text-white text-sm h-[40px] w-[100px] hover:bg-red-400 hover:outline hover:outline-black";
+
+    onMount(async()=>{
+        categories = (await graphqlGetCategories({})).data.transactionCategory
+        statuses = (await graphqlGetStatuses({})).data.transactionStatus
+    })
 
     function addLeadingZero(num:number){
         let result:string
@@ -58,7 +66,7 @@
         }
     }
 
-    function submitUpdate(){
+    async function submitUpdate(){
         let set:Transaction_Insert_Input = {}
         if(amount !== transaction.amount){
             set.amount = transaction.amount
@@ -87,6 +95,7 @@
             }
         }
         graphqlUpdateTransaction({where:{id:{_eq:transaction.id}},_set:set})
+        transaction = (await graphqlGetTransactions({where:{id:{_eq:transaction.id}}})).data.transaction.at(0) ?? transaction
         editMode = false;
     }
 
@@ -103,34 +112,24 @@
 <tr class="even:bg-gray-100 odd:bg-blue-100">
     <td><input disabled={editMode === false} bind:value={transaction.amount}/></td>
     <td><input disabled={editMode === false} bind:value={transaction.description}/></td>
-
-    {#if editMode}
+    
     <td>
-        <select bind:value={transaction.categoryEnum}>
-            <option value={1}>utilities</option>
-            <option value={2}>entertainment</option>
-            <option value={3}>food</option>
+        <select disabled={editMode === false} bind:value={transaction.categoryEnum}>
+            {#each categories as cat}
+                <option value={cat.enum}>{cat.description}</option>
+            {/each}
         </select>
     </td>
-    {:else}
-    <td><input disabled={editMode === false} value={transaction.category.description}/></td>
-    {/if}
-
+   
     <td><input disabled={editMode === false} max={todayString} bind:value={transaction.transactionDate} type="date"/></td>
-    
-
-    {#if editMode}
     <td>
-        <select bind:value={transaction.statusEnum}>
+        <select disabled={editMode === false} bind:value={transaction.statusEnum}>
             <option value={1}>pending</option>
             <option value={2}>completed</option>
         </select>
     </td>
-    {:else}
-    <td><input disabled value={transaction.status.description}/></td>
-    {/if}
-    <td><input disabled={editMode === false || transaction.statusEnum === 2} bind:value={transaction.postDate} type="date"/></td>
 
+    <td><input disabled={editMode === false || transaction.statusEnum === 2} bind:value={transaction.postDate} type="date"/></td>
     {#if editMode === false}
         <td><button on:click={toggleEditMode} class={buttonStyle}>Edit</button></td>
     {:else if editMode === true}
