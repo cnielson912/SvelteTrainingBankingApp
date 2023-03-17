@@ -8,16 +8,24 @@
         updatedAt?: any;
         description: string;
         amount: any;
-        status: string;
-        category: string;
+        statusEnum: number;
+        categoryEnum: number;
         transactionDate: any;
         postDate?: any;
         accountId?: any;
+        status:{
+            description:string;
+            enum:number;
+        };
+        category:{
+            description:string;
+            enum:number;
+        };
     }
 
     let amount:number = transaction.amount;
     let description:string = transaction.description;
-    let category:string = transaction.category;
+    let category:number = transaction.categoryEnum;
     let transactionDate:Date = transaction.transactionDate;
     let postDate:Date = transaction.postDate;
     let today = new Date()
@@ -58,8 +66,8 @@
         if(description !== transaction.description){
             set.description = transaction.description
         }
-        if(category !== transaction.category){
-            set.category = transaction.category
+        if(category !== transaction.categoryEnum){
+            set.categoryEnum = transaction.categoryEnum
         }
         if(transactionDate !== transaction.transactionDate){
             if(transaction.transactionDate < todayString){
@@ -72,7 +80,7 @@
         if(postDate !== transaction.postDate){
             if(transaction.postDate >= transaction.transactionDate){
                 set.postDate = transaction.postDate
-                set.status = "completed"
+                set.statusEnum = 2
             }
             else{
                 transaction.postDate = postDate
@@ -85,7 +93,7 @@
     function cancelUpdate(){
         transaction.amount = amount;
         transaction.description = description;
-        transaction.category = category;
+        transaction.categoryEnum = category;
         transaction.transactionDate = transactionDate;
         transaction.postDate = postDate;
         editMode = false;
@@ -95,10 +103,34 @@
 <tr class="even:bg-gray-100 odd:bg-blue-100">
     <td><input disabled={editMode === false} bind:value={transaction.amount}/></td>
     <td><input disabled={editMode === false} bind:value={transaction.description}/></td>
-    <td><input disabled={editMode === false} bind:value={transaction.category}/></td>
+
+    {#if editMode}
+    <td>
+        <select bind:value={transaction.categoryEnum}>
+            <option value={1}>utilities</option>
+            <option value={2}>entertainment</option>
+            <option value={3}>food</option>
+        </select>
+    </td>
+    {:else}
+    <td><input disabled={editMode === false} value={transaction.category.description}/></td>
+    {/if}
+
     <td><input disabled={editMode === false} max={todayString} bind:value={transaction.transactionDate} type="date"/></td>
-    <td><input disabled bind:value={transaction.status}/></td>
-    <td><input disabled={editMode === false || transaction.status === "completed"} bind:value={transaction.postDate} type="date"/></td>
+    
+
+    {#if editMode}
+    <td>
+        <select bind:value={transaction.statusEnum}>
+            <option value={1}>pending</option>
+            <option value={2}>completed</option>
+        </select>
+    </td>
+    {:else}
+    <td><input disabled value={transaction.status.description}/></td>
+    {/if}
+    <td><input disabled={editMode === false || transaction.statusEnum === 2} bind:value={transaction.postDate} type="date"/></td>
+
     {#if editMode === false}
         <td><button on:click={toggleEditMode} class={buttonStyle}>Edit</button></td>
     {:else if editMode === true}

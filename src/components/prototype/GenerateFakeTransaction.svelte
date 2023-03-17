@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
 	import { faker } from '@faker-js/faker';
+	import { graphqlInsertTransaction } from '../../graphql/graphqlApi';
 
 	function generateTransaction() {
 		const transactionDate = faker.date.between('2023-02-13', '2023-04-13');
@@ -38,8 +39,8 @@
 	async function generate() {
 		disabled = true;
 		const body = JSON.stringify({
-			query:
-				'mutation insertTransactions($objects: [transaction_insert_input!]!){\n  insert_transaction(objects: $objects){\n    affected_rows\n  }\n}',
+			//query: graphqlInsertTransaction,
+			query:	'mutation insertTransactions($objects: [transaction_insert_input!]!){\n  insert_transaction(objects: $objects){\n    affected_rows\n  }\n}',
 			variables: {
 				objects: [...Array(10).keys()].map(generateTransaction)
 			}

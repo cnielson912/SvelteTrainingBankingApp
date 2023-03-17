@@ -1,5 +1,5 @@
 mutation insertTransaction {
-  insert_transaction(objects: {amount: "", description: "", category: "", status: "", transactionDate: "", postDate: "", accountId: ""}) {
+  insert_transaction(objects: {amount: "", description: "", categoryEnum: 0, statusEnum: 0, transactionDate: "", postDate: "", accountId: ""}) {
     affected_rows
   }
 }

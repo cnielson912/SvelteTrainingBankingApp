@@ -8,12 +8,13 @@
     export let color:string;
     export let dataLabel:string;
     export let graphTitle:string;
+    export let graphData:number[];
 
     let data = {
         labels:labels,
         datasets:[{
             label: dataLabel,
-            data: [],
+            data: graphData,
             fill: false,
             borderColor: color,
             tension: 0.1

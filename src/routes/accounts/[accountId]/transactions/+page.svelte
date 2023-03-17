@@ -5,6 +5,7 @@
 	import { graphqlGetAccounts, graphqlGetTotalSum, graphqlGetTransactions } from "../../../../graphql/graphqlApi";
     import type { GetTransactionsQuery } from "../../../../graphql/graphql";
 	import TableRow from '../../../../components/TableRow.svelte';
+	import { transactionStatus } from '../../../../graphql/transactionStatus';
     
     let params = $page.params;
     let transactions:GetTransactionsQuery["transaction"] = [];
@@ -43,8 +44,8 @@
         ];
         transactions = (await graphqlGetTransactions({where:{accountId:{_eq:params.accountId}, transactionDate:{_gte:selectedDate}}, limit:numResults, offset:currentpage*numResults})).data.transaction;
         totalAll = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}}})).data.transaction_aggregate.aggregate?.sum?.amount
-        totalComplete = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}, status:{_eq:"completed"}}})).data.transaction_aggregate.aggregate?.sum?.amount
-        totalPending = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}, status:{_eq:"pending"}}})).data.transaction_aggregate.aggregate?.sum?.amount
+        totalComplete = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}, statusEnum:{_eq:transactionStatus.complete}}})).data.transaction_aggregate.aggregate?.sum?.amount
+        totalPending = (await graphqlGetTotalSum({where:{accountId:{_eq:params.accountId}, statusEnum:{_eq:transactionStatus.pending}}})).data.transaction_aggregate.aggregate?.sum?.amount
     })
 
     async function updateTable(argument:'increment'|'decrement'|'changeamount'| 'setdate', amount?:number, datepicked?:Date){

@@ -14,6 +14,7 @@ export type Scalars = {
   Float: number;
   date: any;
   money: any;
+  timestamptz: any;
   uuid: any;
 };
 
@@ -275,6 +276,14 @@ export type Mutation_Root = {
   delete_account_by_pk?: Maybe<Account>;
   /** delete data from the table: "transaction" */
   delete_transaction?: Maybe<Transaction_Mutation_Response>;
+  /** delete data from the table: "transactionCategory" */
+  delete_transactionCategory?: Maybe<TransactionCategory_Mutation_Response>;
+  /** delete single row from the table: "transactionCategory" */
+  delete_transactionCategory_by_pk?: Maybe<TransactionCategory>;
+  /** delete data from the table: "transactionStatus" */
+  delete_transactionStatus?: Maybe<TransactionStatus_Mutation_Response>;
+  /** delete single row from the table: "transactionStatus" */
+  delete_transactionStatus_by_pk?: Maybe<TransactionStatus>;
   /** delete single row from the table: "transaction" */
   delete_transaction_by_pk?: Maybe<Transaction>;
   /** insert data into the table: "account" */
@@ -283,6 +292,14 @@ export type Mutation_Root = {
   insert_account_one?: Maybe<Account>;
   /** insert data into the table: "transaction" */
   insert_transaction?: Maybe<Transaction_Mutation_Response>;
+  /** insert data into the table: "transactionCategory" */
+  insert_transactionCategory?: Maybe<TransactionCategory_Mutation_Response>;
+  /** insert a single row into the table: "transactionCategory" */
+  insert_transactionCategory_one?: Maybe<TransactionCategory>;
+  /** insert data into the table: "transactionStatus" */
+  insert_transactionStatus?: Maybe<TransactionStatus_Mutation_Response>;
+  /** insert a single row into the table: "transactionStatus" */
+  insert_transactionStatus_one?: Maybe<TransactionStatus>;
   /** insert a single row into the table: "transaction" */
   insert_transaction_one?: Maybe<Transaction>;
   /** update data of the table: "account" */
@@ -293,6 +310,18 @@ export type Mutation_Root = {
   update_account_many?: Maybe<Array<Maybe<Account_Mutation_Response>>>;
   /** update data of the table: "transaction" */
   update_transaction?: Maybe<Transaction_Mutation_Response>;
+  /** update data of the table: "transactionCategory" */
+  update_transactionCategory?: Maybe<TransactionCategory_Mutation_Response>;
+  /** update single row of the table: "transactionCategory" */
+  update_transactionCategory_by_pk?: Maybe<TransactionCategory>;
+  /** update multiples rows of table: "transactionCategory" */
+  update_transactionCategory_many?: Maybe<Array<Maybe<TransactionCategory_Mutation_Response>>>;
+  /** update data of the table: "transactionStatus" */
+  update_transactionStatus?: Maybe<TransactionStatus_Mutation_Response>;
+  /** update single row of the table: "transactionStatus" */
+  update_transactionStatus_by_pk?: Maybe<TransactionStatus>;
+  /** update multiples rows of table: "transactionStatus" */
+  update_transactionStatus_many?: Maybe<Array<Maybe<TransactionStatus_Mutation_Response>>>;
   /** update single row of the table: "transaction" */
   update_transaction_by_pk?: Maybe<Transaction>;
   /** update multiples rows of table: "transaction" */
@@ -315,6 +344,30 @@ export type Mutation_RootDelete_Account_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootDelete_TransactionArgs = {
   where: Transaction_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_TransactionCategoryArgs = {
+  where: TransactionCategory_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_TransactionCategory_By_PkArgs = {
+  enum: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_TransactionStatusArgs = {
+  where: TransactionStatus_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_TransactionStatus_By_PkArgs = {
+  enum: Scalars['Int'];
 };
 
 
@@ -342,6 +395,34 @@ export type Mutation_RootInsert_Account_OneArgs = {
 export type Mutation_RootInsert_TransactionArgs = {
   objects: Array<Transaction_Insert_Input>;
   on_conflict?: InputMaybe<Transaction_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_TransactionCategoryArgs = {
+  objects: Array<TransactionCategory_Insert_Input>;
+  on_conflict?: InputMaybe<TransactionCategory_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_TransactionCategory_OneArgs = {
+  object: TransactionCategory_Insert_Input;
+  on_conflict?: InputMaybe<TransactionCategory_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_TransactionStatusArgs = {
+  objects: Array<TransactionStatus_Insert_Input>;
+  on_conflict?: InputMaybe<TransactionStatus_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_TransactionStatus_OneArgs = {
+  object: TransactionStatus_Insert_Input;
+  on_conflict?: InputMaybe<TransactionStatus_On_Conflict>;
 };
 
 
@@ -377,6 +458,50 @@ export type Mutation_RootUpdate_TransactionArgs = {
   _inc?: InputMaybe<Transaction_Inc_Input>;
   _set?: InputMaybe<Transaction_Set_Input>;
   where: Transaction_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_TransactionCategoryArgs = {
+  _inc?: InputMaybe<TransactionCategory_Inc_Input>;
+  _set?: InputMaybe<TransactionCategory_Set_Input>;
+  where: TransactionCategory_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_TransactionCategory_By_PkArgs = {
+  _inc?: InputMaybe<TransactionCategory_Inc_Input>;
+  _set?: InputMaybe<TransactionCategory_Set_Input>;
+  pk_columns: TransactionCategory_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_TransactionCategory_ManyArgs = {
+  updates: Array<TransactionCategory_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_TransactionStatusArgs = {
+  _inc?: InputMaybe<TransactionStatus_Inc_Input>;
+  _set?: InputMaybe<TransactionStatus_Set_Input>;
+  where: TransactionStatus_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_TransactionStatus_By_PkArgs = {
+  _inc?: InputMaybe<TransactionStatus_Inc_Input>;
+  _set?: InputMaybe<TransactionStatus_Set_Input>;
+  pk_columns: TransactionStatus_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_TransactionStatus_ManyArgs = {
+  updates: Array<TransactionStatus_Updates>;
 };
 
 
@@ -419,6 +544,18 @@ export type Query_Root = {
   account_by_pk?: Maybe<Account>;
   /** fetch data from the table: "transaction" */
   transaction: Array<Transaction>;
+  /** fetch data from the table: "transactionCategory" */
+  transactionCategory: Array<TransactionCategory>;
+  /** fetch aggregated fields from the table: "transactionCategory" */
+  transactionCategory_aggregate: TransactionCategory_Aggregate;
+  /** fetch data from the table: "transactionCategory" using primary key columns */
+  transactionCategory_by_pk?: Maybe<TransactionCategory>;
+  /** fetch data from the table: "transactionStatus" */
+  transactionStatus: Array<TransactionStatus>;
+  /** fetch aggregated fields from the table: "transactionStatus" */
+  transactionStatus_aggregate: TransactionStatus_Aggregate;
+  /** fetch data from the table: "transactionStatus" using primary key columns */
+  transactionStatus_by_pk?: Maybe<TransactionStatus>;
   /** fetch aggregated fields from the table: "transaction" */
   transaction_aggregate: Transaction_Aggregate;
   /** fetch data from the table: "transaction" using primary key columns */
@@ -458,6 +595,52 @@ export type Query_RootTransactionArgs = {
 };
 
 
+export type Query_RootTransactionCategoryArgs = {
+  distinct_on?: InputMaybe<Array<TransactionCategory_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<TransactionCategory_Order_By>>;
+  where?: InputMaybe<TransactionCategory_Bool_Exp>;
+};
+
+
+export type Query_RootTransactionCategory_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<TransactionCategory_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<TransactionCategory_Order_By>>;
+  where?: InputMaybe<TransactionCategory_Bool_Exp>;
+};
+
+
+export type Query_RootTransactionCategory_By_PkArgs = {
+  enum: Scalars['Int'];
+};
+
+
+export type Query_RootTransactionStatusArgs = {
+  distinct_on?: InputMaybe<Array<TransactionStatus_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<TransactionStatus_Order_By>>;
+  where?: InputMaybe<TransactionStatus_Bool_Exp>;
+};
+
+
+export type Query_RootTransactionStatus_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<TransactionStatus_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<TransactionStatus_Order_By>>;
+  where?: InputMaybe<TransactionStatus_Bool_Exp>;
+};
+
+
+export type Query_RootTransactionStatus_By_PkArgs = {
+  enum: Scalars['Int'];
+};
+
+
 export type Query_RootTransaction_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -483,6 +666,22 @@ export type Subscription_Root = {
   account_stream: Array<Account>;
   /** fetch data from the table: "transaction" */
   transaction: Array<Transaction>;
+  /** fetch data from the table: "transactionCategory" */
+  transactionCategory: Array<TransactionCategory>;
+  /** fetch aggregated fields from the table: "transactionCategory" */
+  transactionCategory_aggregate: TransactionCategory_Aggregate;
+  /** fetch data from the table: "transactionCategory" using primary key columns */
+  transactionCategory_by_pk?: Maybe<TransactionCategory>;
+  /** fetch data from the table in a streaming manner: "transactionCategory" */
+  transactionCategory_stream: Array<TransactionCategory>;
+  /** fetch data from the table: "transactionStatus" */
+  transactionStatus: Array<TransactionStatus>;
+  /** fetch aggregated fields from the table: "transactionStatus" */
+  transactionStatus_aggregate: TransactionStatus_Aggregate;
+  /** fetch data from the table: "transactionStatus" using primary key columns */
+  transactionStatus_by_pk?: Maybe<TransactionStatus>;
+  /** fetch data from the table in a streaming manner: "transactionStatus" */
+  transactionStatus_stream: Array<TransactionStatus>;
   /** fetch aggregated fields from the table: "transaction" */
   transaction_aggregate: Transaction_Aggregate;
   /** fetch data from the table: "transaction" using primary key columns */
@@ -531,6 +730,66 @@ export type Subscription_RootTransactionArgs = {
 };
 
 
+export type Subscription_RootTransactionCategoryArgs = {
+  distinct_on?: InputMaybe<Array<TransactionCategory_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<TransactionCategory_Order_By>>;
+  where?: InputMaybe<TransactionCategory_Bool_Exp>;
+};
+
+
+export type Subscription_RootTransactionCategory_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<TransactionCategory_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<TransactionCategory_Order_By>>;
+  where?: InputMaybe<TransactionCategory_Bool_Exp>;
+};
+
+
+export type Subscription_RootTransactionCategory_By_PkArgs = {
+  enum: Scalars['Int'];
+};
+
+
+export type Subscription_RootTransactionCategory_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<TransactionCategory_Stream_Cursor_Input>>;
+  where?: InputMaybe<TransactionCategory_Bool_Exp>;
+};
+
+
+export type Subscription_RootTransactionStatusArgs = {
+  distinct_on?: InputMaybe<Array<TransactionStatus_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<TransactionStatus_Order_By>>;
+  where?: InputMaybe<TransactionStatus_Bool_Exp>;
+};
+
+
+export type Subscription_RootTransactionStatus_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<TransactionStatus_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<TransactionStatus_Order_By>>;
+  where?: InputMaybe<TransactionStatus_Bool_Exp>;
+};
+
+
+export type Subscription_RootTransactionStatus_By_PkArgs = {
+  enum: Scalars['Int'];
+};
+
+
+export type Subscription_RootTransactionStatus_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<TransactionStatus_Stream_Cursor_Input>>;
+  where?: InputMaybe<TransactionStatus_Bool_Exp>;
+};
+
+
 export type Subscription_RootTransaction_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Transaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -551,6 +810,19 @@ export type Subscription_RootTransaction_StreamArgs = {
   where?: InputMaybe<Transaction_Bool_Exp>;
 };
 
+/** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
+export type Timestamptz_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['timestamptz']>;
+  _gt?: InputMaybe<Scalars['timestamptz']>;
+  _gte?: InputMaybe<Scalars['timestamptz']>;
+  _in?: InputMaybe<Array<Scalars['timestamptz']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['timestamptz']>;
+  _lte?: InputMaybe<Scalars['timestamptz']>;
+  _neq?: InputMaybe<Scalars['timestamptz']>;
+  _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
+};
+
 /** columns and relationships of "transaction" */
 export type Transaction = {
   __typename?: 'transaction';
@@ -558,14 +830,474 @@ export type Transaction = {
   account?: Maybe<Account>;
   accountId?: Maybe<Scalars['uuid']>;
   amount: Scalars['money'];
-  category: Scalars['String'];
+  /** An object relationship */
+  category: TransactionCategory;
+  categoryEnum: Scalars['Int'];
   createdAt: Scalars['date'];
   description: Scalars['String'];
   id: Scalars['Int'];
   postDate?: Maybe<Scalars['date']>;
-  status: Scalars['String'];
+  /** An object relationship */
+  status: TransactionStatus;
+  statusEnum: Scalars['Int'];
   transactionDate: Scalars['date'];
   updatedAt?: Maybe<Scalars['date']>;
+};
+
+/** columns and relationships of "transactionCategory" */
+export type TransactionCategory = {
+  __typename?: 'transactionCategory';
+  created_at: Scalars['timestamptz'];
+  description: Scalars['String'];
+  enum: Scalars['Int'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "transactionCategory" */
+export type TransactionCategory_Aggregate = {
+  __typename?: 'transactionCategory_aggregate';
+  aggregate?: Maybe<TransactionCategory_Aggregate_Fields>;
+  nodes: Array<TransactionCategory>;
+};
+
+/** aggregate fields of "transactionCategory" */
+export type TransactionCategory_Aggregate_Fields = {
+  __typename?: 'transactionCategory_aggregate_fields';
+  avg?: Maybe<TransactionCategory_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<TransactionCategory_Max_Fields>;
+  min?: Maybe<TransactionCategory_Min_Fields>;
+  stddev?: Maybe<TransactionCategory_Stddev_Fields>;
+  stddev_pop?: Maybe<TransactionCategory_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<TransactionCategory_Stddev_Samp_Fields>;
+  sum?: Maybe<TransactionCategory_Sum_Fields>;
+  var_pop?: Maybe<TransactionCategory_Var_Pop_Fields>;
+  var_samp?: Maybe<TransactionCategory_Var_Samp_Fields>;
+  variance?: Maybe<TransactionCategory_Variance_Fields>;
+};
+
+
+/** aggregate fields of "transactionCategory" */
+export type TransactionCategory_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<TransactionCategory_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type TransactionCategory_Avg_Fields = {
+  __typename?: 'transactionCategory_avg_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "transactionCategory". All fields are combined with a logical 'AND'. */
+export type TransactionCategory_Bool_Exp = {
+  _and?: InputMaybe<Array<TransactionCategory_Bool_Exp>>;
+  _not?: InputMaybe<TransactionCategory_Bool_Exp>;
+  _or?: InputMaybe<Array<TransactionCategory_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  enum?: InputMaybe<Int_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "transactionCategory" */
+export enum TransactionCategory_Constraint {
+  /** unique or primary key constraint on columns "enum" */
+  TransactionCategoryPkey = 'transactionCategory_pkey'
+}
+
+/** input type for incrementing numeric columns in table "transactionCategory" */
+export type TransactionCategory_Inc_Input = {
+  enum?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "transactionCategory" */
+export type TransactionCategory_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  enum?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type TransactionCategory_Max_Fields = {
+  __typename?: 'transactionCategory_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  enum?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type TransactionCategory_Min_Fields = {
+  __typename?: 'transactionCategory_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  enum?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "transactionCategory" */
+export type TransactionCategory_Mutation_Response = {
+  __typename?: 'transactionCategory_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<TransactionCategory>;
+};
+
+/** input type for inserting object relation for remote table "transactionCategory" */
+export type TransactionCategory_Obj_Rel_Insert_Input = {
+  data: TransactionCategory_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<TransactionCategory_On_Conflict>;
+};
+
+/** on_conflict condition type for table "transactionCategory" */
+export type TransactionCategory_On_Conflict = {
+  constraint: TransactionCategory_Constraint;
+  update_columns?: Array<TransactionCategory_Update_Column>;
+  where?: InputMaybe<TransactionCategory_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "transactionCategory". */
+export type TransactionCategory_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  enum?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: transactionCategory */
+export type TransactionCategory_Pk_Columns_Input = {
+  enum: Scalars['Int'];
+};
+
+/** select columns of table "transactionCategory" */
+export enum TransactionCategory_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Enum = 'enum',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "transactionCategory" */
+export type TransactionCategory_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  enum?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type TransactionCategory_Stddev_Fields = {
+  __typename?: 'transactionCategory_stddev_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type TransactionCategory_Stddev_Pop_Fields = {
+  __typename?: 'transactionCategory_stddev_pop_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type TransactionCategory_Stddev_Samp_Fields = {
+  __typename?: 'transactionCategory_stddev_samp_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "transactionCategory" */
+export type TransactionCategory_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: TransactionCategory_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type TransactionCategory_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  enum?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type TransactionCategory_Sum_Fields = {
+  __typename?: 'transactionCategory_sum_fields';
+  enum?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "transactionCategory" */
+export enum TransactionCategory_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Enum = 'enum',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type TransactionCategory_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<TransactionCategory_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<TransactionCategory_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: TransactionCategory_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type TransactionCategory_Var_Pop_Fields = {
+  __typename?: 'transactionCategory_var_pop_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type TransactionCategory_Var_Samp_Fields = {
+  __typename?: 'transactionCategory_var_samp_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type TransactionCategory_Variance_Fields = {
+  __typename?: 'transactionCategory_variance_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "transactionStatus" */
+export type TransactionStatus = {
+  __typename?: 'transactionStatus';
+  created_at: Scalars['timestamptz'];
+  description: Scalars['String'];
+  enum: Scalars['Int'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "transactionStatus" */
+export type TransactionStatus_Aggregate = {
+  __typename?: 'transactionStatus_aggregate';
+  aggregate?: Maybe<TransactionStatus_Aggregate_Fields>;
+  nodes: Array<TransactionStatus>;
+};
+
+/** aggregate fields of "transactionStatus" */
+export type TransactionStatus_Aggregate_Fields = {
+  __typename?: 'transactionStatus_aggregate_fields';
+  avg?: Maybe<TransactionStatus_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<TransactionStatus_Max_Fields>;
+  min?: Maybe<TransactionStatus_Min_Fields>;
+  stddev?: Maybe<TransactionStatus_Stddev_Fields>;
+  stddev_pop?: Maybe<TransactionStatus_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<TransactionStatus_Stddev_Samp_Fields>;
+  sum?: Maybe<TransactionStatus_Sum_Fields>;
+  var_pop?: Maybe<TransactionStatus_Var_Pop_Fields>;
+  var_samp?: Maybe<TransactionStatus_Var_Samp_Fields>;
+  variance?: Maybe<TransactionStatus_Variance_Fields>;
+};
+
+
+/** aggregate fields of "transactionStatus" */
+export type TransactionStatus_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<TransactionStatus_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type TransactionStatus_Avg_Fields = {
+  __typename?: 'transactionStatus_avg_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "transactionStatus". All fields are combined with a logical 'AND'. */
+export type TransactionStatus_Bool_Exp = {
+  _and?: InputMaybe<Array<TransactionStatus_Bool_Exp>>;
+  _not?: InputMaybe<TransactionStatus_Bool_Exp>;
+  _or?: InputMaybe<Array<TransactionStatus_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  enum?: InputMaybe<Int_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "transactionStatus" */
+export enum TransactionStatus_Constraint {
+  /** unique or primary key constraint on columns "enum" */
+  TransactionStatusPkey = 'transactionStatus_pkey'
+}
+
+/** input type for incrementing numeric columns in table "transactionStatus" */
+export type TransactionStatus_Inc_Input = {
+  enum?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "transactionStatus" */
+export type TransactionStatus_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  enum?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type TransactionStatus_Max_Fields = {
+  __typename?: 'transactionStatus_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  enum?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type TransactionStatus_Min_Fields = {
+  __typename?: 'transactionStatus_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  enum?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "transactionStatus" */
+export type TransactionStatus_Mutation_Response = {
+  __typename?: 'transactionStatus_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<TransactionStatus>;
+};
+
+/** input type for inserting object relation for remote table "transactionStatus" */
+export type TransactionStatus_Obj_Rel_Insert_Input = {
+  data: TransactionStatus_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<TransactionStatus_On_Conflict>;
+};
+
+/** on_conflict condition type for table "transactionStatus" */
+export type TransactionStatus_On_Conflict = {
+  constraint: TransactionStatus_Constraint;
+  update_columns?: Array<TransactionStatus_Update_Column>;
+  where?: InputMaybe<TransactionStatus_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "transactionStatus". */
+export type TransactionStatus_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  enum?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: transactionStatus */
+export type TransactionStatus_Pk_Columns_Input = {
+  enum: Scalars['Int'];
+};
+
+/** select columns of table "transactionStatus" */
+export enum TransactionStatus_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Enum = 'enum',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "transactionStatus" */
+export type TransactionStatus_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  enum?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type TransactionStatus_Stddev_Fields = {
+  __typename?: 'transactionStatus_stddev_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type TransactionStatus_Stddev_Pop_Fields = {
+  __typename?: 'transactionStatus_stddev_pop_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type TransactionStatus_Stddev_Samp_Fields = {
+  __typename?: 'transactionStatus_stddev_samp_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "transactionStatus" */
+export type TransactionStatus_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: TransactionStatus_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type TransactionStatus_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  enum?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type TransactionStatus_Sum_Fields = {
+  __typename?: 'transactionStatus_sum_fields';
+  enum?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "transactionStatus" */
+export enum TransactionStatus_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Enum = 'enum',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type TransactionStatus_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<TransactionStatus_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<TransactionStatus_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: TransactionStatus_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type TransactionStatus_Var_Pop_Fields = {
+  __typename?: 'transactionStatus_var_pop_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type TransactionStatus_Var_Samp_Fields = {
+  __typename?: 'transactionStatus_var_samp_fields';
+  enum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type TransactionStatus_Variance_Fields = {
+  __typename?: 'transactionStatus_variance_fields';
+  enum?: Maybe<Scalars['Float']>;
 };
 
 /** aggregated selection of "transaction" */
@@ -635,13 +1367,17 @@ export type Transaction_Arr_Rel_Insert_Input = {
 export type Transaction_Avg_Fields = {
   __typename?: 'transaction_avg_fields';
   amount?: Maybe<Scalars['Float']>;
+  categoryEnum?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  statusEnum?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "transaction" */
 export type Transaction_Avg_Order_By = {
   amount?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "transaction". All fields are combined with a logical 'AND'. */
@@ -652,12 +1388,14 @@ export type Transaction_Bool_Exp = {
   account?: InputMaybe<Account_Bool_Exp>;
   accountId?: InputMaybe<Uuid_Comparison_Exp>;
   amount?: InputMaybe<Money_Comparison_Exp>;
-  category?: InputMaybe<String_Comparison_Exp>;
+  category?: InputMaybe<TransactionCategory_Bool_Exp>;
+  categoryEnum?: InputMaybe<Int_Comparison_Exp>;
   createdAt?: InputMaybe<Date_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   postDate?: InputMaybe<Date_Comparison_Exp>;
-  status?: InputMaybe<String_Comparison_Exp>;
+  status?: InputMaybe<TransactionStatus_Bool_Exp>;
+  statusEnum?: InputMaybe<Int_Comparison_Exp>;
   transactionDate?: InputMaybe<Date_Comparison_Exp>;
   updatedAt?: InputMaybe<Date_Comparison_Exp>;
 };
@@ -671,7 +1409,9 @@ export enum Transaction_Constraint {
 /** input type for incrementing numeric columns in table "transaction" */
 export type Transaction_Inc_Input = {
   amount?: InputMaybe<Scalars['money']>;
+  categoryEnum?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['Int']>;
+  statusEnum?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "transaction" */
@@ -679,12 +1419,14 @@ export type Transaction_Insert_Input = {
   account?: InputMaybe<Account_Obj_Rel_Insert_Input>;
   accountId?: InputMaybe<Scalars['uuid']>;
   amount?: InputMaybe<Scalars['money']>;
-  category?: InputMaybe<Scalars['String']>;
+  category?: InputMaybe<TransactionCategory_Obj_Rel_Insert_Input>;
+  categoryEnum?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['date']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   postDate?: InputMaybe<Scalars['date']>;
-  status?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<TransactionStatus_Obj_Rel_Insert_Input>;
+  statusEnum?: InputMaybe<Scalars['Int']>;
   transactionDate?: InputMaybe<Scalars['date']>;
   updatedAt?: InputMaybe<Scalars['date']>;
 };
@@ -694,12 +1436,12 @@ export type Transaction_Max_Fields = {
   __typename?: 'transaction_max_fields';
   accountId?: Maybe<Scalars['uuid']>;
   amount?: Maybe<Scalars['money']>;
-  category?: Maybe<Scalars['String']>;
+  categoryEnum?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['date']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   postDate?: Maybe<Scalars['date']>;
-  status?: Maybe<Scalars['String']>;
+  statusEnum?: Maybe<Scalars['Int']>;
   transactionDate?: Maybe<Scalars['date']>;
   updatedAt?: Maybe<Scalars['date']>;
 };
@@ -708,12 +1450,12 @@ export type Transaction_Max_Fields = {
 export type Transaction_Max_Order_By = {
   accountId?: InputMaybe<Order_By>;
   amount?: InputMaybe<Order_By>;
-  category?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   postDate?: InputMaybe<Order_By>;
-  status?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
   transactionDate?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
 };
@@ -723,12 +1465,12 @@ export type Transaction_Min_Fields = {
   __typename?: 'transaction_min_fields';
   accountId?: Maybe<Scalars['uuid']>;
   amount?: Maybe<Scalars['money']>;
-  category?: Maybe<Scalars['String']>;
+  categoryEnum?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['date']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   postDate?: Maybe<Scalars['date']>;
-  status?: Maybe<Scalars['String']>;
+  statusEnum?: Maybe<Scalars['Int']>;
   transactionDate?: Maybe<Scalars['date']>;
   updatedAt?: Maybe<Scalars['date']>;
 };
@@ -737,12 +1479,12 @@ export type Transaction_Min_Fields = {
 export type Transaction_Min_Order_By = {
   accountId?: InputMaybe<Order_By>;
   amount?: InputMaybe<Order_By>;
-  category?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   postDate?: InputMaybe<Order_By>;
-  status?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
   transactionDate?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
 };
@@ -768,12 +1510,14 @@ export type Transaction_Order_By = {
   account?: InputMaybe<Account_Order_By>;
   accountId?: InputMaybe<Order_By>;
   amount?: InputMaybe<Order_By>;
-  category?: InputMaybe<Order_By>;
+  category?: InputMaybe<TransactionCategory_Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   postDate?: InputMaybe<Order_By>;
-  status?: InputMaybe<Order_By>;
+  status?: InputMaybe<TransactionStatus_Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
   transactionDate?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
 };
@@ -790,7 +1534,7 @@ export enum Transaction_Select_Column {
   /** column name */
   Amount = 'amount',
   /** column name */
-  Category = 'category',
+  CategoryEnum = 'categoryEnum',
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -800,7 +1544,7 @@ export enum Transaction_Select_Column {
   /** column name */
   PostDate = 'postDate',
   /** column name */
-  Status = 'status',
+  StatusEnum = 'statusEnum',
   /** column name */
   TransactionDate = 'transactionDate',
   /** column name */
@@ -811,12 +1555,12 @@ export enum Transaction_Select_Column {
 export type Transaction_Set_Input = {
   accountId?: InputMaybe<Scalars['uuid']>;
   amount?: InputMaybe<Scalars['money']>;
-  category?: InputMaybe<Scalars['String']>;
+  categoryEnum?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['date']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   postDate?: InputMaybe<Scalars['date']>;
-  status?: InputMaybe<Scalars['String']>;
+  statusEnum?: InputMaybe<Scalars['Int']>;
   transactionDate?: InputMaybe<Scalars['date']>;
   updatedAt?: InputMaybe<Scalars['date']>;
 };
@@ -825,39 +1569,51 @@ export type Transaction_Set_Input = {
 export type Transaction_Stddev_Fields = {
   __typename?: 'transaction_stddev_fields';
   amount?: Maybe<Scalars['Float']>;
+  categoryEnum?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  statusEnum?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "transaction" */
 export type Transaction_Stddev_Order_By = {
   amount?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Transaction_Stddev_Pop_Fields = {
   __typename?: 'transaction_stddev_pop_fields';
   amount?: Maybe<Scalars['Float']>;
+  categoryEnum?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  statusEnum?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "transaction" */
 export type Transaction_Stddev_Pop_Order_By = {
   amount?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Transaction_Stddev_Samp_Fields = {
   __typename?: 'transaction_stddev_samp_fields';
   amount?: Maybe<Scalars['Float']>;
+  categoryEnum?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  statusEnum?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "transaction" */
 export type Transaction_Stddev_Samp_Order_By = {
   amount?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "transaction" */
@@ -872,12 +1628,12 @@ export type Transaction_Stream_Cursor_Input = {
 export type Transaction_Stream_Cursor_Value_Input = {
   accountId?: InputMaybe<Scalars['uuid']>;
   amount?: InputMaybe<Scalars['money']>;
-  category?: InputMaybe<Scalars['String']>;
+  categoryEnum?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['date']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   postDate?: InputMaybe<Scalars['date']>;
-  status?: InputMaybe<Scalars['String']>;
+  statusEnum?: InputMaybe<Scalars['Int']>;
   transactionDate?: InputMaybe<Scalars['date']>;
   updatedAt?: InputMaybe<Scalars['date']>;
 };
@@ -886,13 +1642,17 @@ export type Transaction_Stream_Cursor_Value_Input = {
 export type Transaction_Sum_Fields = {
   __typename?: 'transaction_sum_fields';
   amount?: Maybe<Scalars['money']>;
+  categoryEnum?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+  statusEnum?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "transaction" */
 export type Transaction_Sum_Order_By = {
   amount?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "transaction" */
@@ -902,7 +1662,7 @@ export enum Transaction_Update_Column {
   /** column name */
   Amount = 'amount',
   /** column name */
-  Category = 'category',
+  CategoryEnum = 'categoryEnum',
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -912,7 +1672,7 @@ export enum Transaction_Update_Column {
   /** column name */
   PostDate = 'postDate',
   /** column name */
-  Status = 'status',
+  StatusEnum = 'statusEnum',
   /** column name */
   TransactionDate = 'transactionDate',
   /** column name */
@@ -932,39 +1692,51 @@ export type Transaction_Updates = {
 export type Transaction_Var_Pop_Fields = {
   __typename?: 'transaction_var_pop_fields';
   amount?: Maybe<Scalars['Float']>;
+  categoryEnum?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  statusEnum?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "transaction" */
 export type Transaction_Var_Pop_Order_By = {
   amount?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Transaction_Var_Samp_Fields = {
   __typename?: 'transaction_var_samp_fields';
   amount?: Maybe<Scalars['Float']>;
+  categoryEnum?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  statusEnum?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "transaction" */
 export type Transaction_Var_Samp_Order_By = {
   amount?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Transaction_Variance_Fields = {
   __typename?: 'transaction_variance_fields';
   amount?: Maybe<Scalars['Float']>;
+  categoryEnum?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  statusEnum?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "transaction" */
 export type Transaction_Variance_Order_By = {
   amount?: InputMaybe<Order_By>;
+  categoryEnum?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  statusEnum?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
@@ -1021,13 +1793,13 @@ export type GetTransactionsQueryVariables = Exact<{
 }>;
 
 
-export type GetTransactionsQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', id: number, createdAt: any, updatedAt?: any | null, description: string, amount: any, status: string, category: string, transactionDate: any, postDate?: any | null, accountId?: any | null }> };
+export type GetTransactionsQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', id: number, createdAt: any, updatedAt?: any | null, description: string, amount: any, statusEnum: number, categoryEnum: number, transactionDate: any, postDate?: any | null, accountId?: any | null, status: { __typename?: 'transactionStatus', description: string, enum: number }, category: { __typename?: 'transactionCategory', description: string, enum: number } }> };
 
 
 export const InsertTransactionDocument = gql`
     mutation insertTransaction {
   insert_transaction(
-    objects: {amount: "", description: "", category: "", status: "", transactionDate: "", postDate: "", accountId: ""}
+    objects: {amount: "", description: "", categoryEnum: 0, statusEnum: 0, transactionDate: "", postDate: "", accountId: ""}
   ) {
     affected_rows
   }
@@ -1081,8 +1853,16 @@ export const GetTransactionsDocument = gql`
     updatedAt
     description
     amount
-    status
-    category
+    statusEnum
+    categoryEnum
+    status {
+      description
+      enum
+    }
+    category {
+      description
+      enum
+    }
     transactionDate
     postDate
     accountId

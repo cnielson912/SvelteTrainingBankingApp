@@ -11,8 +11,16 @@ query GetTransactions($where:transaction_bool_exp, $limit: Int, $offset: Int) {
     updatedAt
     description
     amount
-    status
-    category
+    statusEnum
+    categoryEnum
+    status {
+      description
+      enum
+    }
+    category {
+      description
+      enum
+    }
     transactionDate
     postDate
     accountId
