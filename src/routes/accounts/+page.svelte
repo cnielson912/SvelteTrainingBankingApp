@@ -24,4 +24,31 @@ import Card from '../../components/Card.svelte';
     {#each accounts as account}
     <div class="p-2 col-span-1"><a href={"/accounts/" + account.id}><Card account={account.name.toString()}/></a></div>
     {/each}
+
+    <div class="col-span-3 w-full h-5 bg-black"></div>
+
+    <div>
+        Transfer
+        <input type="number" class="outline rounded-md"/>
+    </div>
+
+    <div>
+        From
+        <select class="outline rounded-md">
+            {#each accounts as account}
+            <option value={account.id}>{account.name}</option>
+            {/each}
+        </select>
+        
+    </div>
+
+    <div>
+        To
+        <select class="outline rounded-md">
+            {#each accounts as account}
+                <option value={account.id}>{account.name}</option>
+            {/each}
+        </select>
+        
+    </div>
 </div>
